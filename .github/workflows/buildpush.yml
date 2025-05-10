@@ -49,8 +49,8 @@ jobs:
 
       - name: Commit updated Helm chart
         run: |
-          git config user.name "github-actions"
-          git config user.email "ci@example.com"
+          git config user.name "gouertani"
+          git config user.email "ghassenouertanii@gmail.com"
           git add ./resume/values.yaml
           git commit -m "Update image tag to $IMAGE_TAG"
           git push
