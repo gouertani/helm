@@ -1,10 +1,4 @@
-# Build stage part
-# Build stage part
-# Build stage part
-# Build stage part
-# Build stage part
-# Build stage part
-# Build stage part
+# Build stage
 FROM node:18-alpine AS build
 
 # Set the working directory inside the container
