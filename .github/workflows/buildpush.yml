@@ -21,6 +21,10 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v3
 
+      - name: Debug secrets
+        run: |
+          echo "USERNAME: ${{ secrets.HARBOR_USERNAME != '' && 'OK' || 'MISSING' }}"
+          echo "PASSWORD: ${{ secrets.HARBOR_PASSWORD != '' && 'OK' || 'MISSING' }}"
 
       - name: Set image version
         id: vars
@@ -39,3 +43,14 @@ jobs:
         run: |
           docker push $REGISTRY/$PROJECT/$IMAGE_NAME:$IMAGE_TAG
 
+      - name: Update Helm chart with new image tag
+        run: |
+          sed -i "s|tag:.*|tag: \"$IMAGE_TAG\"|g" ./resume/values.yaml
+
+      - name: Commit updated Helm chart
+        run: |
+          git config user.name "github-actions"
+          git config user.email "ci@example.com"
+          git add ./resume-chart/values.yaml
+          git commit -m "Update image tag to $IMAGE_TAG"
+          git push
