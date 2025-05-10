@@ -53,7 +53,7 @@ jobs:
           git config user.email "ghassenouertanii@gmail.com"
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/gouertani/helm.git
 
-      - name: Commit updated Helm charts
+      - name: Commit updated Helm chart
         run: |
           git add ./resume/values.yaml
           git commit -m "Update image tag to $IMAGE_TAG" || echo "No changes to commit"
