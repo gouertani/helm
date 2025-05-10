@@ -1,0 +1,39 @@
+name: Build & Push to Harbor
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'resume/**'
+      - '.github/workflows/**'
+
+jobs:
+  build-push:
+    runs-on: self-hosted
+
+    env:
+      REGISTRY: core.harbor.domain
+      IMAGE_NAME: resume
+      PROJECT: test
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+
+      - name: Set image version
+        id: vars
+        run: echo "IMAGE_TAG=$(date +%Y%m%d%H%M%S)" >> "$GITHUB_ENV"
+
+      - name: Log in to Harbor
+        run: |
+          echo "${{ secrets.HARBOR_PASSWORD }}" | docker login $REGISTRY -u ${{ secrets.HARBOR_USERNAME }} --password-stdin
+
+      - name: Build Docker image
+        run: |
+          docker build -t $REGISTRY/$PROJECT/$IMAGE_NAME:$IMAGE_TAG -f myresume/resume.dockerfile
+
+      - name: Push Docker image
+        run: |
+          docker push $REGISTRY/$PROJECT/$IMAGE_NAME:$IMAGE_TAG
+

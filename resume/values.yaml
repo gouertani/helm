@@ -1,0 +1,12 @@
+image:
+  repository: core.harbor.domain/test/resume
+  tag: "4.0.0"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 3000
+
+ingress:
+  enabled: true
+  host: resume.local
