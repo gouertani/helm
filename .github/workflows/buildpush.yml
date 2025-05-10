@@ -49,10 +49,10 @@ jobs:
 
       - name: Set up Git for pushing
         run: |
-          git config user.name "gouertani"
+          git config user.name "actions"
           git config user.email "ghassenouertanii@gmail.com"
           git remote set-url origin https://${{ secrets.GH_PAT }}@github.com/gouertani/helm.git
-
+          
       - name: Commit updated Helm charts
         run: |
           git add ./resume/values.yaml
