@@ -1,6 +1,6 @@
 image:
   repository: core.harbor.domain/test/resume
-  tag: "20250510131910"
+  tag: "20250510132446"
   pullPolicy: IfNotPresent
 
 service:
