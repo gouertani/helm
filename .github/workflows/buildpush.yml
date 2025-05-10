@@ -21,6 +21,11 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v3
 
+      - name: Debug secrets
+        run: |
+          echo "USERNAME: ${{ secrets.HARBOR_USERNAME != '' && 'OK' || 'MISSING' }}"
+          echo "PASSWORD: ${{ secrets.HARBOR_PASSWORD != '' && 'OK' || 'MISSING' }}"
+
       - name: Set image version
         id: vars
         run: echo "IMAGE_TAG=$(date +%Y%m%d%H%M%S)" >> "$GITHUB_ENV"
