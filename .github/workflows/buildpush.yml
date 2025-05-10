@@ -36,7 +36,8 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t $REGISTRY/$PROJECT/$IMAGE_NAME:$IMAGE_TAG -f myresume/resume.dockerfile
+          docker build -t $REGISTRY/$PROJECT/$IMAGE_NAME:$IMAGE_TAG \
+          -f myresume/resume.dockerfile myresume/
 
       - name: Push Docker image
         run: |
