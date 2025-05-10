@@ -1,6 +1,6 @@
 image:
   repository: core.harbor.domain/test/resume
-  tag: "4.0.0"
+  tag: "4.0.1"
   pullPolicy: IfNotPresent
 
 service:
